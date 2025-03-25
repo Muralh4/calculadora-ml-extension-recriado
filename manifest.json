@@ -1,0 +1,27 @@
+{
+    "manifest_version": 3,
+    "name": "Calculadora ML - Autopeças",
+    "version": "3.0",
+    "description": "Calculadora de lucro líquido para vendas no Mercado Livre com captura automática de preços",
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": "icons/icon48.png"
+    },
+    "permissions": ["storage", "activeTab", "scripting"],
+    "host_permissions": ["*://*.mercadolivre.com.br/*"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://produto.mercadolivre.com.br/MLB-*"],
+            "js": ["ml-price-scraper.js"],
+            "run_at": "document_end"
+        }
+    ]
+}
